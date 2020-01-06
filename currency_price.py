@@ -5,6 +5,7 @@ Get currency price
 import xml.etree.ElementTree as ET
 import pickle
 import os
+from datetime import datetime
 import requests
 from dataset import Dataset
 
@@ -51,7 +52,7 @@ class Crawler():
                 break
             for row in rows:
                 grids = list(row) 
-                date = grids[0][0].text
+                date = datetime.strptime(grids[0][0].text, '%Y-%m-%d')
                 if date == self.renew_date[instrument]:
                     synchronized = True
                     break
