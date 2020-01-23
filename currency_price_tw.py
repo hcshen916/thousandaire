@@ -7,7 +7,7 @@ import pickle
 import os
 from datetime import datetime
 import requests
-from dataset import Data
+from dataset import Data, Dataset
 
 class Crawler():
     """
@@ -89,4 +89,4 @@ class Crawler():
         return_data = {}
         for instrument in self.instruments:
             return_data[instrument] = self.crawl_data(instrument)
-        return return_data
+        return Dataset(self.data_name, return_data)
