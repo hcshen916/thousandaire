@@ -38,3 +38,12 @@ class Data(list):
 
     def extend(self, iterable):
         list.extend(self, list(map(self.materialize, iterable)))
+
+class Dataset(dict):
+    """
+    Merge all data into one set.
+    This will be called in the simulator.
+    """
+    def __init__(self, data_name, data):
+        dict.__init__(self, data)
+        self.data_name = data_name
