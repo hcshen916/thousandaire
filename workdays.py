@@ -5,7 +5,7 @@ Refer to trading day of currency
 
 import os
 import pickle
-from dataset import Data
+from dataset import Data, Dataset
 from data_loader import DataLoader
 
 class Crawler():
@@ -59,4 +59,4 @@ class Crawler():
         return_data = {}
         for region in self.regions:
             return_data[region] = self.set_workdays(region)
-        return return_data
+        return Dataset(self.data_name, return_data)
