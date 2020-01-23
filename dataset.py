@@ -4,12 +4,12 @@ Adjust data into the format we want.
 
 import collections
 
-class Dataset(list):
+class Data(list):
     """
     Change the data into the reservation mode.
     """
     def __new__(cls, name, fields):
-        self = super(Dataset, Dataset).__new__(Dataset)
+        self = super(Data, Data).__new__(Data)
         self.name = name
         self.fields = ['date'] + fields
         self.data_type = collections.namedtuple(name, self.fields)
@@ -21,7 +21,7 @@ class Dataset(list):
     def __reduce_ex__(self, proto):
         return (
             self.__new__,
-            (Dataset, self.name, self.fields[1:]),
+            (Data, self.name, self.fields[1:]),
             None,
             map(tuple, self),
             None
