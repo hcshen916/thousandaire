@@ -47,7 +47,7 @@ class Crawler():
         for value in reference_data[data_name][reference_currency][::-1]:
             if value.date == self.renew_date[region]:
                 break
-            return_data.append((value.date))
+            return_data.append((value.date,))
         self.renew_date[region] = return_data[0].date
         return_data.reverse()
         return return_data
