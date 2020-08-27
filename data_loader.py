@@ -3,7 +3,8 @@ Implementation of DataLoader module.
 """
 
 import pickle
-from dataset import Dataset
+from thousandaire.constants import DATA_DIR
+from thousandaire.dataset import Dataset
 
 class DataLoader:
     """
@@ -13,8 +14,9 @@ class DataLoader:
     def __init__(self, data_list):
         self.data = {}
         for data_name in data_list:
+            data_path = DATA_DIR + '/' + data_name
             try:
-                with open(data_name, "rb") as file:
+                with open(data_path, "rb") as file:
                     self.data[data_name] = pickle.load(file)
             except FileNotFoundError:
                 self.data[data_name] = Dataset(data_name, {})
