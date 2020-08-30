@@ -2,6 +2,7 @@
 Implementation of DataLoader module.
 """
 
+import os
 import pickle
 from thousandaire.constants import DATA_DIR
 from thousandaire.dataset import Dataset
@@ -14,7 +15,7 @@ class DataLoader:
     def __init__(self, data_list):
         self.data = {}
         for data_name in data_list:
-            data_path = DATA_DIR + '/' + data_name
+            data_path = os.path.join(DATA_DIR, data_name)
             try:
                 with open(data_path, "rb") as file:
                     self.data[data_name] = pickle.load(file)
