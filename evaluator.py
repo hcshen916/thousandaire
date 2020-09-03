@@ -142,10 +142,16 @@ def turnover(positions):
     Turnover rate
     """
     d_turnover = [] # daily turnover rate
-    for position_1st, position_2nd in zip(positions[:-1], positions[1:]):
-        diff2_1 = {m: position_2nd[m] for m in set(position_2nd) - set(position_1st)}
-        diff1_2 = {m: position_1st[m] for m in set(position_1st) - set(position_2nd)}
-        d_change = {m: abs(position_2nd[m] - position_1st[m]) for m in position_1st if m in position_2nd}
+    for pos_1st, pos_2nd in zip(positions[:-1], positions[1:]):
+        diff2_1 = {m: pos_2nd[m]
+                   for m in set(pos_2nd) - set(pos_1st)
+                   }
+        diff1_2 = {m: pos_1st[m]
+                   for m in set(pos_1st) - set(pos_2nd)
+                   }
+        d_change = {m: abs(pos_2nd[m] - pos_1st[m])
+                    for m in pos_1st if m in pos_2nd
+                    }
         d_change.update(diff2_1)
         d_change.update(diff1_2)
         d_turnover.append(sum(d_change.values()) / 2)
