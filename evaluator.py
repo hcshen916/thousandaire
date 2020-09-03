@@ -4,8 +4,8 @@ Evaluator calculates indicators for an alpha to evaluate alpha performance.
 
 from multiprocessing import Array, Process, Queue
 import ctypes
-import numpy as np
 import pickle
+import numpy as np
 
 DATES = 'dates'
 PNLS = 'pnls'
@@ -142,11 +142,11 @@ def turnover(positions):
     Turnover rate
     """
     d_turnover = [] # daily turnover rate
-    for p1, p2 in zip(positions[:-1], positions[1:]):
-        diff1 = {m: p2[m] for m in set(p2) - set(p1)}
-        diff2 = {m: p1[m] for m in set(p1) - set(p2)}
-        v = {m: abs(p2[m] - p1[m]) for m in p1 if m in p2}
-        v.update(diff1)
-        v.update(diff2)
-        d_turnover.append(sum(v.values()) / 2)
+    for position_1st, position_2nd in zip(positions[:-1], positions[1:]):
+        diff2_1 = {m: position_2nd[m] for m in set(position_2nd) - set(position_1st)}
+        diff1_2 = {m: position_1st[m] for m in set(position_1st) - set(position_2nd)}
+        d_change = {m: abs(position_2nd[m] - position_1st[m]) for m in position_1st if m in position_2nd}
+        d_change.update(diff2_1)
+        d_change.update(diff1_2)
+        d_turnover.append(sum(d_change.values()) / 2)
     return {'Mean': np.mean(d_turnover), 'Std': np.std(d_turnover)}
