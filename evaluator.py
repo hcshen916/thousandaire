@@ -4,10 +4,8 @@ Evaluator calculates indicators for an alpha to evaluate alpha performance.
 
 from multiprocessing import Array, Process, Queue
 import ctypes
-import datetime
 import numpy as np
 import pickle
-from statistics import mean 
 
 DATES = 'dates'
 PNLS = 'pnls'
